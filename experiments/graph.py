@@ -26,6 +26,26 @@ BTC ------------> ETH
 ETH <------------ BTC
 
 
+Arbitrage pseudocode, assume: all nodes have degree >= 2
+
+origin = BTC
+current = origin
+cash = 1000
+gains = cash
+max_path_len = 3                                # tri-arb
+visited = []
+for child in current.children():
+    if path_len > 3:
+        break
+    if child == origin:
+        return gains
+    if child not visited:
+        current = child
+        path_len += 1
+        gains = gains * rate(current, child)
+
+
+
 """
 
 import networkx as nx
